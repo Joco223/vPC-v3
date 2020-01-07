@@ -1,0 +1,58 @@
+64 memory
+8 16bit general purpose registers
+Overflow, undeflow and halted flags
+
+Instruction set:
+0x0: Set halted flag to true
+
+--Memory management
+0x01 0X YY YY: Set register X to value YYYY
+0x02 0X YY YY: Read one byte at address YYYY into lsb of register X
+0x03 0X YY YY: Read one byte at address YYYY into msb of register X
+0x04 0X YY YY: Write lsb from register X into address YYYY
+0x05 0X YY YY: Write msb from register X into address YYYY
+0x06 0X YY YY: Read one byte at address YYYY is pointing at into lsb of register X
+0x07 0X YY YY: Read one byte at address YYYY is pointing at into msb of register X
+0x08 0X YY YY: Write lsb from register X into address YYYY is pointing at
+0x09 0X YY YY: Write msb from register X into address YYYY is pointing at
+0x0a XY:       Set register X to value in register Y
+0x0b XY:       Read one byte at address register Y is pointing at into lsb of register X
+0x0c XY:       Read one byte at address register Y is pointing at into msb of register X
+0x0d XY:       Write lsb from register X into address register Y is pointing at
+0x0e XY:       Write msb from reigster X into address register Y is pointing at
+
+--Arithmetic instructions
+0x0f XY:       Add value stored in register Y to the value in register X (Sets overflow flag to on if resulting value exceeds max register capacity)
+0x10 XY:       Subtract value stored in register X by value in register Y (Sets underflow flag to on if resulting value is smaller than 0)
+0x11 XY:       Multiply value stored in register X by value in register Y (Sets overflow flag to on if resulting value exceeds max register capacity)
+0x12 XY:       Divide value stored in register X by value in register Y (Unsigned)
+0x13 XY:       Divide value stored in register X by value in register Y (Signed)
+0x14 XY:       Modulo value stored in register X by value in register Y
+
+--Logical instructions
+0x15 XY:       Compare if value stored in register X is greater than value stored in register Y
+0x16 XY:       Compare if value stored in register X is greater or equal than value stored in register Y
+0x17 XY:       Compare if value stored in register X is smaller than value stored in reguster Y
+0x18 XY:       Compare if value stored in register X is smaller or equal than value stored in register Y
+0x19 XY:       Compare if value stored in register X is equal to value stored in register Y
+
+--Flow control instructions
+0x1a XX XX:    Set program counter to XXXX
+0x1b 0X YY YY: Set program counter to YYYY if value stored in register X is 0
+0x1c 0X YY YY: Set program counter to YYYY if value stored in register X is 1
+0x1d XX XX:    Set program counter to XXXX if overflow flag is on (Resets overflow flag)
+0x1e XX XX:    Set program counter to XXXX if undeflow flag is on (Resets underflow flag)
+
+--Stack operation instructions
+0x1f 0X:       Push value stored in register X onto stack
+0x20 XY:       Read value from stack with offset stored in register Y and store it into register X
+0x21 0X:       Pop number of elements stored in register X from the stack (Also decrement the stack pointer by the same amount)
+0x22 0X:       Push current program counter onto the stack and set program counter to value stored in register X (Set the stack counter to the new stack size)
+0x23 0X:       Set program counter to the value in stack pointet at by stack pointer and offset stored in register X
+
+--IO instructions
+0x24 0X:       Print value stored in register X to console (Unsigned)
+0x25 0X:       Print value stored in register X to console (Signed)
+0x26 0X:       Print value stored in register X as a character to console
+0x27 XX XX:    Read a line from console input and store it into memory begging at address XXXX
+0x28 0X YY YY: Print number stored in register X values from memory starting at address YYYY
