@@ -1,0 +1,4 @@
+mov 5, reg_a
+mov #0xaa, rel_b --Do the comments work?
+add reg_a, reg_b
+outu reg_a

@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <string>
 
 #include "cpu.h"
 
@@ -8,30 +10,25 @@ int main(int argc, char** argv) {
 		std::cout << "Provide the program file.\n";
 		return 0;
 	}
+	std::fstream input_program_file(argv[1], std::ios::in | std::ios::binary);
 
-	cpu CPU = cpu();
+	if(!input_program_file.is_open()) {
+		std::cout << "Couln't open file: " << argv[1] << '\n';
+		return 0; 
+	}else{
+		cpu CPU = cpu();
 
-	//Small test program that takes input, squares it and outputs it to the screen
-	CPU.set_memory_byte(0x27, 0);
-	CPU.set_memory_byte(0xaa, 1);
-	CPU.set_memory_byte(0xaa, 2);
+		std::string input_program((std::istreambuf_iterator<char>(input_program_file)), std::istreambuf_iterator<char>());
+		input_program_file.close();
+		
+		CPU.load_data(input_program);
 
-	CPU.set_memory_byte(0x02, 3);
-	CPU.set_memory_byte(0x00, 4);
-	CPU.set_memory_byte(0xaa, 5);
-	CPU.set_memory_byte(0xaa, 6);
+		while(!CPU.is_halted()) {
+			CPU.proces_instruction();
+		}
 
-	CPU.set_memory_byte(0x11, 7);
-	CPU.set_memory_byte(0x00, 8);
+		std::cout << "\nCPU has halted.\n";
 
-	CPU.set_memory_byte(0x24, 9);
-	CPU.set_memory_byte(0x00, 10);
-
-	while(!CPU.is_halted()) {
-		CPU.proces_instruction();
+		return 0;
 	}
-
-	std::cout << "\nCPU has halted.";
-
-	return 0;
 }

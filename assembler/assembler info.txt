@@ -1,0 +1,40 @@
+You can access lsb of a register by using rel_x (where x is any register from a to h)
+You can access msb of a register by using rem_x
+You can access the whole register by using reg_x
+
+To use a value as an address, put # before the value
+
+To use hex value, prefix the number with 0x
+To use binary value, prefix the number with 0b
+Assembler defaults to dec values
+
+Instruction list:
+mov register/memory_address, memory_address/register - Corresponds to 0x01-0x05 depending on the arguments
+mov_p register/memory_address, memory_address/register - Corresponds to 0x06-0x09 depending on the arguments
+mov_pr register/memory_address, register/memory_address - Corresponds to 0x0a-0x0e depending on the arguments
+add register1, register2 - Corresponds to 0x0f
+sub register1, register2 - Corresponds to 0x10
+mlt register1, register2 - Corresponds to 0x11
+divu register1, register2 - Corresponds to 0x12
+divs register1, register2 - Corresponds to 0x13
+mod register1, register2 - Corresponds to 0x14
+lrg register1, register2 - Corresponds to 0x15
+lrg_e register1, register2 - Corresponds to 0x16
+sml register1, register2 - Corresponds to 0x17
+sml_e register1, register2 - Corresponds to 0x18
+eql register1, register2 - Corresponds to 0x19
+jmp memory_address - Corresponds to 0x1a
+jmpz register, memory_address - Corresponds to 0x1b
+jmpo register, memory_address - Corresponds to 0x1c
+jmpof memory_address - Corresponds to 0x1d
+jmpuf memory_address - Corresponds to 0x1e
+push register - Corresponds to 0x1f
+peek register1, register2 - Corresponds to 0x20
+pop register - Corresponds to 0x21
+jmpc register - Corresponds to 0x22
+jmpp register - Corresponds to 0x23
+outu register - Corresponds to 0x24
+outs register - Corresponds to 0x25
+outc register - Corresponds to 0x26
+in memory_address - Corresponds to 0x27
+out register, memory_address - Corresponds to 0x28

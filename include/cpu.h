@@ -48,7 +48,7 @@ public:
 	cpu();
 
 	void set_memory_byte(byte data, word offset);
-	void load_data(std::vector<byte>& data);
+	void load_data(std::string& data);
 
 	void reset_cpu();
 	void proces_instruction();

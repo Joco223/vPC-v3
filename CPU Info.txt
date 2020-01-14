@@ -48,7 +48,7 @@ Instruction set:
 0x20 XY:       Read value from stack with offset stored in register Y and store it into register X
 0x21 0X:       Pop number of elements stored in register X from the stack (Also decrement the stack pointer by the same amount)
 0x22 0X:       Push current program counter onto the stack and set program counter to value stored in register X (Set the stack counter to the new stack size)
-0x23 0X:       Set program counter to the value in stack pointet at by stack pointer and offset stored in register X
+0x23 0X:       Set program counter to the value in stack pointer at by stack pointer and offset stored in register X
 
 --IO instructions
 0x24 0X:       Print value stored in register X to console (Unsigned)

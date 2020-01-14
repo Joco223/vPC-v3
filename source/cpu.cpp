@@ -39,8 +39,8 @@ void cpu::set_memory_byte(byte data, word offset) {
 	memory[offset] = data;
 }
 
-void cpu::load_data(std::vector<byte>& data) {
-	for(word i = 0; i < data.size(); i++) {
+void cpu::load_data(std::string& data) {
+	for(word i = 0; i < data.length(); i++) {
 		memory[i] = data[i];
 	}
 }
